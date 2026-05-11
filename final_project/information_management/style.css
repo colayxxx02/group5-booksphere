@@ -1,0 +1,586 @@
+* { margin:0; padding:0; box-sizing:border-box; }
+body { font-family: 'Segoe UI', sans-serif; color:#222; background:#fff; }
+
+/* NAVBAR */
+nav {
+    display:flex; justify-content:space-between; align-items:center;
+    padding:18px 60px; border-bottom:1px solid #eee;
+    position:sticky; top:0; background:#fff; z-index:100;
+}
+.logo { display:flex; align-items:center; gap:8px; font-size:22px; font-weight:700; color:#1a1a2e; }
+.logo span { font-size:26px; }
+.nav-links { display:flex; gap:35px; list-style:none; }
+.nav-links a { text-decoration:none; color:#444; font-size:15px; }
+.nav-links a:hover { color:#1a1a2e; }
+.nav-actions { display:flex; gap:12px; }
+.btn-login {
+    padding:9px 24px; border:2px solid #1a1a2e; border-radius:25px;
+    background:transparent; color:#1a1a2e; font-size:15px; cursor:pointer;
+    font-weight:600; transition:all 0.2s;
+}
+.btn-login:hover { background:#1a1a2e; color:#fff; }
+.btn-signup {
+    padding:9px 24px; border:none; border-radius:25px;
+    background:#1a1a2e; color:#fff; font-size:15px; cursor:pointer;
+    font-weight:600; transition:background 0.2s;
+}
+.btn-signup:hover { background:#2d2d6b; }
+
+/* HERO */
+.hero { text-align:center; padding:80px 60px 50px; }
+.hero h1 { font-size:58px; font-weight:800; color:#1a1a2e; line-height:1.1; }
+.hero h1 span { color:#4e6ef2; }
+.hero p { font-size:19px; color:#666; margin:20px auto; max-width:580px; line-height:1.7; }
+.hero-btns { margin-top:35px; display:flex; gap:15px; justify-content:center; flex-wrap:wrap; }
+.btn-primary {
+    padding:14px 36px; border-radius:30px; background:#4e6ef2;
+    color:#fff; font-size:16px; font-weight:700; border:none; cursor:pointer;
+    transition:background 0.2s;
+}
+.btn-primary:hover { background:#3a55d4; }
+.btn-secondary {
+    padding:14px 36px; border-radius:30px; background:transparent;
+    color:#1a1a2e; font-size:16px; font-weight:700;
+    border:2px solid #1a1a2e; cursor:pointer; transition:all 0.2s;
+}
+.btn-secondary:hover { background:#1a1a2e; color:#fff; }
+
+/* APP PREVIEW */
+.preview {
+    margin:50px auto; max-width:900px; border-radius:16px;
+    box-shadow:0 8px 40px rgba(0,0,0,0.13); overflow:hidden;
+    background:#f4f6fb; padding:30px;
+}
+.preview-bar {
+    background:#1a1a2e; border-radius:10px; padding:15px 20px;
+    display:flex; align-items:center; gap:15px; color:#fff; margin-bottom:20px;
+}
+.preview-bar .dot { width:12px; height:12px; border-radius:50%; }
+.preview-bar span { font-size:14px; opacity:0.7; }
+.preview-content { display:grid; grid-template-columns:200px 1fr; gap:15px; }
+.preview-sidebar { background:#fff; border-radius:10px; padding:15px; }
+.preview-sidebar .menu-item {
+    padding:8px 12px; border-radius:6px; color:#555; font-size:13px; margin-bottom:5px;
+}
+.preview-sidebar .menu-item.active { background:#4e6ef2; color:#fff; }
+.preview-main { background:#fff; border-radius:10px; padding:20px; }
+.book-grid { display:grid; grid-template-columns:repeat(4, 1fr); gap:10px; margin-top:15px; }
+.book-card {
+    background:#f0f3ff; border-radius:8px; padding:12px;
+    text-align:center; font-size:11px; color:#444;
+}
+.book-icon { font-size:28px; display:block; margin-bottom:5px; }
+
+/* FEATURES */
+.features { padding:70px 60px; background:#f9f9ff; }
+.features h2 { text-align:center; font-size:36px; font-weight:800; color:#1a1a2e; margin-bottom:10px; }
+.features p.sub { text-align:center; color:#888; margin-bottom:45px; font-size:16px; }
+.feature-grid {
+    display:grid; grid-template-columns:repeat(3, 1fr); gap:25px;
+    max-width:1000px; margin:0 auto;
+}
+.feature-card {
+    background:#fff; border-radius:12px; padding:30px 25px;
+    box-shadow:0 2px 15px rgba(0,0,0,0.06); text-align:center;
+}
+.feature-card .icon { font-size:36px; margin-bottom:12px; }
+.feature-card h3 { font-size:18px; color:#1a1a2e; margin-bottom:8px; }
+.feature-card p { color:#777; font-size:14px; line-height:1.6; }
+
+/* ABOUT */
+.about-section { padding:70px 60px; text-align:center; max-width:700px; margin:0 auto; }
+.about-section h2 { font-size:34px; font-weight:800; color:#1a1a2e; margin-bottom:15px; }
+.about-section p { color:#666; font-size:16px; line-height:1.8; }
+
+/* CONTACT */
+.contact-section { padding:50px 60px; background:#f9f9ff; text-align:center; }
+.contact-section h2 { font-size:28px; color:#1a1a2e; margin-bottom:10px; }
+.contact-section p { color:#888; }
+
+/* FOOTER */
+footer {
+    text-align:center; padding:30px; color:#aaa;
+    font-size:14px; border-top:1px solid #eee; background:#fff;
+}
+
+/* ===== MODAL & LOGIN/SIGNUP ===== */
+.modal {
+    display:none; position:fixed; top:0; left:0;
+    width:100%; height:100%; background:rgba(0,0,0,0.5); z-index:999;
+}
+.modal-content {
+    background:#fff; margin:8% auto; padding:40px; width:420px;
+    border-radius:16px; text-align:center; position:relative;
+    box-shadow:0 10px 40px rgba(0,0,0,0.15);
+    animation:slideDown 0.3s ease-in-out;
+}
+
+@keyframes slideDown {
+    from {
+        transform:translateY(-30px);
+        opacity:0;
+    }
+    to {
+        transform:translateY(0);
+        opacity:1;
+    }
+}
+
+.modal-content h2 { font-size:26px; color:#1a1a2e; margin-bottom:5px; font-weight:800; }
+.modal-content > p { color:#888; font-size:14px; margin-bottom:25px; }
+
+/* FORM GROUPS */
+.form-group {
+    margin-bottom:16px;
+    display:flex;
+    flex-direction:column;
+    text-align:left;
+}
+
+.form-group label {
+    font-size:12px;
+    font-weight:700;
+    color:#333;
+    margin-bottom:6px;
+    text-transform:uppercase;
+    letter-spacing:0.5px;
+}
+
+.modal-content input,
+.modal-content select {
+    width:100%;
+    padding:12px 14px;
+    margin-bottom:0;
+    border:1px solid #ddd;
+    border-radius:8px;
+    font-size:14px;
+    font-family:inherit;
+    transition:all 0.2s;
+    background:#f9f9fb;
+}
+
+.modal-content input:focus,
+.modal-content select:focus {
+    outline:none;
+    border-color:#4e6ef2;
+    background:#fff;
+    box-shadow:0 0 0 3px rgba(78,110,242,0.1);
+}
+
+.modal-content input::placeholder {
+    color:#bbb;
+}
+
+.password-info {
+    font-size:12px;
+    color:#888;
+    margin-top:4px;
+    margin-bottom:12px;
+}
+
+/* BUTTONS */
+.btn-submit {
+    width:100%;
+    padding:13px;
+    background:#1a1a2e;
+    color:#fff;
+    border:none;
+    border-radius:30px;
+    font-size:16px;
+    font-weight:700;
+    cursor:pointer;
+    transition:all 0.2s;
+    margin-top:8px;
+}
+
+.btn-submit:hover {
+    background:#4e6ef2;
+    transform:translateY(-1px);
+    box-shadow:0 4px 12px rgba(78,110,242,0.3);
+}
+
+.btn-submit:active {
+    transform:translateY(0);
+}
+
+/* CLOSE BUTTON */
+.close {
+    position:absolute;
+    top:15px;
+    right:20px;
+    font-size:24px;
+    cursor:pointer;
+    color:#aaa;
+    transition:color 0.2s;
+}
+
+.close:hover {
+    color:#c62828;
+}
+
+/* ALERTS */
+.error {
+    background:#fdecea;
+    color:#c62828;
+    padding:12px;
+    border-radius:8px;
+    font-size:13px;
+    margin-bottom:16px;
+    border:1px solid #f8bbd9;
+    display:flex;
+    align-items:center;
+    gap:8px;
+}
+
+.success {
+    background:#e8f5e9;
+    color:#2e7d32;
+    padding:12px;
+    border-radius:8px;
+    font-size:13px;
+    margin-bottom:16px;
+    border:1px solid #c8e6c9;
+    display:flex;
+    align-items:center;
+    gap:8px;
+}
+
+.modal-footer {
+    margin-top:18px;
+    font-size:14px;
+    color:#666;
+}
+
+.modal-footer a {
+    color:#4e6ef2;
+    text-decoration:none;
+    font-weight:700;
+    cursor:pointer;
+    transition:color 0.2s;
+}
+
+.modal-footer a:hover {
+    color:#3a55d4;
+    text-decoration:underline;
+}
+
+/* ===== SIGNUP PAGE STANDALONE ===== */
+.signup-page {
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    min-height:100vh;
+    padding:20px;
+    background:linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+}
+
+.signup-container {
+    background:#fff;
+    border-radius:16px;
+    box-shadow:0 10px 40px rgba(0,0,0,0.2);
+    width:100%;
+    max-width:420px;
+    padding:40px 30px;
+    animation:slideUp 0.5s ease-in-out;
+}
+
+@keyframes slideUp {
+    from {
+        transform:translateY(30px);
+        opacity:0;
+    }
+    to {
+        transform:translateY(0);
+        opacity:1;
+    }
+}
+
+.signup-header {
+    text-align:center;
+    margin-bottom:30px;
+}
+
+.signup-logo {
+    font-size:36px;
+    margin-bottom:12px;
+}
+
+.signup-header h1 {
+    font-size:28px;
+    font-weight:800;
+    color:#1a1a2e;
+    margin-bottom:6px;
+}
+
+.signup-header p {
+    color:#888;
+    font-size:14px;
+}
+
+.signup-container form {
+    display:flex;
+    flex-direction:column;
+    gap:0;
+}
+
+.signup-container .form-group {
+    margin-bottom:16px;
+}
+
+.signup-container input,
+.signup-container select {
+    width:100%;
+    padding:12px 14px;
+    border:2px solid #e0e4f8;
+    border-radius:8px;
+    font-size:14px;
+    font-family:inherit;
+    transition:all 0.3s;
+    background:#f9f9fb;
+}
+
+.signup-container input:focus,
+.signup-container select:focus {
+    outline:none;
+    border-color:#667eea;
+    background:#fff;
+    box-shadow:0 0 0 4px rgba(102,126,234,0.1);
+}
+
+.signup-container input::placeholder {
+    color:#bbb;
+}
+
+.signup-container .password-info {
+    font-size:12px;
+    color:#888;
+    margin-top:4px;
+    margin-bottom:12px;
+}
+
+.form-actions {
+    display:flex;
+    flex-direction:column;
+    gap:12px;
+    margin-top:24px;
+}
+
+.signup-container .btn-submit {
+    padding:12px;
+    background:linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color:#fff;
+    border:none;
+    border-radius:8px;
+    font-size:15px;
+    font-weight:700;
+    cursor:pointer;
+    transition:all 0.3s;
+    text-transform:uppercase;
+    letter-spacing:0.5px;
+    margin-top:0;
+}
+
+.signup-container .btn-submit:hover {
+    transform:translateY(-2px);
+    box-shadow:0 8px 20px rgba(102,126,234,0.4);
+}
+
+.signup-container .btn-submit:active {
+    transform:translateY(0);
+}
+
+/* ===== RESPONSIVE ===== */
+@media (max-width:768px) {
+    nav {
+        padding:15px 30px;
+        flex-wrap:wrap;
+        gap:15px;
+    }
+
+    .nav-links {
+        gap:20px;
+    }
+
+    .hero {
+        padding:60px 30px 40px;
+    }
+
+    .hero h1 {
+        font-size:42px;
+    }
+
+    .hero p {
+        font-size:16px;
+    }
+
+    .feature-grid {
+        grid-template-columns:repeat(2,1fr);
+        gap:15px;
+    }
+
+    .features,
+    .about-section,
+    .contact-section {
+        padding:50px 30px;
+    }
+
+    .preview {
+        padding:20px;
+        margin:30px auto;
+    }
+
+    .preview-content {
+        grid-template-columns:1fr;
+    }
+
+    .book-grid {
+        grid-template-columns:repeat(2,1fr);
+    }
+
+    .modal-content,
+    .signup-container {
+        width:95%;
+        padding:30px 20px;
+    }
+
+    .modal-content {
+        margin:20% auto;
+    }
+
+    .modal-content h2,
+    .signup-header h1 {
+        font-size:22px;
+    }
+
+    .btn-submit {
+        padding:11px;
+        font-size:14px;
+    }
+}
+
+@media (max-width:480px) {
+    nav {
+        padding:12px 15px;
+        flex-direction:column;
+        gap:12px;
+    }
+
+    .nav-links {
+        gap:15px;
+        font-size:13px;
+    }
+
+    .nav-actions {
+        width:100%;
+        gap:8px;
+    }
+
+    .btn-login,
+    .btn-signup {
+        flex:1;
+        padding:8px 16px;
+        font-size:13px;
+    }
+
+    .hero {
+        padding:40px 20px 30px;
+    }
+
+    .hero h1 {
+        font-size:32px;
+    }
+
+    .hero p {
+        font-size:14px;
+    }
+
+    .hero-btns {
+        flex-direction:column;
+    }
+
+    .btn-primary,
+    .btn-secondary {
+        width:100%;
+        padding:11px;
+        font-size:14px;
+    }
+
+    .feature-grid {
+        grid-template-columns:1fr;
+        gap:12px;
+    }
+
+    .feature-card {
+        padding:20px 15px;
+    }
+
+    .features,
+    .about-section,
+    .contact-section {
+        padding:40px 20px;
+    }
+
+    .features h2,
+    .about-section h2 {
+        font-size:24px;
+    }
+
+    .preview {
+        padding:12px;
+        margin:20px auto;
+    }
+
+    .preview-bar {
+        padding:10px 12px;
+        font-size:12px;
+    }
+
+    .book-grid {
+        grid-template-columns:1fr;
+    }
+
+    .modal-content,
+    .signup-container {
+        width:100%;
+        max-width:400px;
+        padding:20px 15px;
+        margin:30% auto;
+    }
+
+    .modal-content h2,
+    .signup-header h1 {
+        font-size:20px;
+    }
+
+    .modal-content > p,
+    .signup-header p {
+        font-size:13px;
+    }
+
+    .signup-logo {
+        font-size:32px;
+    }
+
+    .btn-submit {
+        padding:10px;
+        font-size:13px;
+    }
+
+    .close {
+        font-size:20px;
+        top:12px;
+        right:15px;
+    }
+
+    .form-group label {
+        font-size:11px;
+    }
+
+    .modal-content input,
+    .modal-content select,
+    .signup-container input,
+    .signup-container select {
+        padding:10px 12px;
+        font-size:13px;
+    }
+}

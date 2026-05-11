@@ -1,0 +1,80 @@
+
+-- Adminer 5.4.2 MariaDB 11.8.6-MariaDB-0+deb13u1 from Debian dump
+
+SET NAMES utf8;
+SET time_zone = '+00:00';
+SET foreign_key_checks = 0;
+SET sql_mode = 'NO_AUTO_VALUE_ON_ZERO';
+
+SET NAMES utf8mb4;
+
+DROP TABLE IF EXISTS `books`;
+CREATE TABLE `books` (
+  `book_id` int(11) NOT NULL,
+  `title` varchar(200) NOT NULL,
+  `author` varchar(100) NOT NULL,
+  `category` varchar(100) DEFAULT NULL,
+  `status` enum('available','borrowed','damaged','archived') NOT NULL DEFAULT 'available',
+  `maintenance_tag` varchar(255) DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT current_timestamp(),
+  PRIMARY KEY (`book_id`)
+) ;
+
+INSERT INTO `books` (`book_id`, `title`, `author`, `category`, `status`, `maintenance_tag`, `created_at`) VALUES
+(1,	'Noli Me Tangere',	'Jose Rizal',	'History',	'archived',	NULL,	'2026-04-09 04:44:49');
+
+DROP TABLE IF EXISTS `maintenance_log`;
+CREATE TABLE `maintenance_log` (
+  `log_id` int(11) NOT NULL,
+  `book_id` int(11) DEFAULT NULL,
+  `reported_by` int(11) DEFAULT NULL,
+  `issue` varchar(255) DEFAULT NULL,
+  `report_date` date DEFAULT NULL,
+  `resolved_date` date DEFAULT NULL,
+  `status` enum('pending','in_progress','resolved') DEFAULT 'pending',
+  `notes` text DEFAULT NULL,
+  PRIMARY KEY (`log_id`),
+  KEY `book_id` (`book_id`),
+  KEY `reported_by` (`reported_by`),
+  CONSTRAINT `maintenance_log_ibfk_1` FOREIGN KEY (`book_id`) REFERENCES `books` (`book_id`),
+  CONSTRAINT `maintenance_log_ibfk_2` FOREIGN KEY (`reported_by`) REFERENCES `users` (`user_id`)
+) ;
+
+DROP TABLE IF EXISTS `transactions`;
+CREATE TABLE `transactions` (
+  `transaction_id` int(11) NOT NULL,
+  `user_id` int(11) DEFAULT NULL,
+  `book_id` int(11) DEFAULT NULL,
+  `borrow_date` date DEFAULT NULL,
+  `due_date` date DEFAULT NULL,
+  `return_date` date DEFAULT NULL,
+  `condition_status` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`transaction_id`),
+  KEY `user_id` (`user_id`),
+  KEY `book_id` (`book_id`),
+  CONSTRAINT `transactions_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `users` (`user_id`),
+  CONSTRAINT `transactions_ibfk_2` FOREIGN KEY (`book_id`) REFERENCES `books` (`book_id`)
+) ;
+
+INSERT INTO `transactions` (`transaction_id`, `user_id`, `book_id`, `borrow_date`, `due_date`, `return_date`, `condition_status`) VALUES
+(1,	1,	1,	'2026-04-09',	'2026-04-12',	'2026-04-09',	NULL);
+
+DROP TABLE IF EXISTS `users`;
+CREATE TABLE `users` (
+  `user_id` int(11) NOT NULL,
+  `fullname` varchar(100) NOT NULL,
+  `email` varchar(100) NOT NULL,
+  `password` varchar(255) NOT NULL,
+  `role` enum('member','librarian') DEFAULT 'member',
+  `created_at` timestamp NULL DEFAULT current_timestamp(),
+  `is_on_hold` tinyint(1) DEFAULT 0,
+  `hold_until` date DEFAULT NULL,
+  PRIMARY KEY (`user_id`),
+  UNIQUE KEY `email` (`email`)
+);
+
+INSERT INTO `users` (`user_id`, `fullname`, `email`, `password`, `role`, `created_at`, `is_on_hold`, `hold_until`) VALUES
+(1,	'Nica Polinar',	'nica@gmail.com',	'$2y$10$EP9wQrEa5nZGnsOkjMZgneQhHSaApDa5JLfYkfI2qiaAZ4giPsT8C',	'member',	'2026-04-09 04:20:33',	0,	NULL),
+(2,	'Administrator',	'admin@gmail.com',	'$2y$10$r0AcmpFLtfSu.O16Z5la5.yprANMf04IKS3bI78mWI4.4kUhdeMZ2',	'librarian',	'2026-04-09 04:29:05',	0,	NULL);
+
+-- 2026-04-13 05:53:17 UTC
